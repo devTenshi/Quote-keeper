@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+
+<h2> Quote of the Day</h2>
+
+<section id="quote-of-the-day">
+  <blockquote>"<%= randomQuote.text %>"</blockquote>
+  <p>— <%= randomQuote.author %></p>
+</section>
+
+<hr />
+
+<h2>All Quotes</h2>
+
+<ul>
+  <% if (quotes.length === 0) { %>
+    <p>No quotes yet. Add one!</p>
+  <% } else { %>
+    <% quotes.forEach((quote, index) => { %>
+      <li>
+        <blockquote>"<%= quote.text %>"</blockquote>
+        <p>-<%= quote.author %></p>
+        <form action="/delete/<%= quote.id %>" method="POST">
+          <input type="hidden" name="index" value="<%= index %>">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    <% }) %>
+  <% } %>
+</ul>
+
+<%- include('partials/footer') %>
